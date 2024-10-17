@@ -1,33 +1,56 @@
-// ação, comédia, ficção científica, terror, romance, guerra
-
-// gente grande, 12, comédia 
-// guardiões da galáxia, 12, ação 
-// homem aranha, LIVRE, ação, ficção científica
-// planeta dos macacos, 12, ação 
-// godzilla vs kong, 12, ação
-// velozes e furiosos 2, 14, ação 
-// Deadpool e Wolverine, 18, comédia, ficção científica
-// o telefone preto, 16, terror 
-// lobo de wall street, 18, comédia
-// titanic, 12, romance 
-// o menino do pijama listrado, 12, guerra
-// a freira, 14, terror
+let campoIdade;
+let campoFantasia;
+let campoAventura;
 
 function setup() {
-  createCanvas(400, 400);
+  createCanvas(800, 400);
+  createElement("h2", "Recomendador de filmes");
+  createSpan("Sua idade:");
+  campoIdade = createInput("5");
+  campoFantasia = createCheckbox("Gosta de fantasia?");
+  campoAventura = createCheckbox("Gosta de aventura?");
 }
 
 function draw() {
- background(220);
- let recomendacao = "lobo de wall street";
-  text(recomenacao, width / 2, height / 2);
+  background("#00BCD4");
+  let idade = campoIdade.value();
+  let gostaDeFantasia = campoFantasia.checked();
+  let gostaDeAventura = campoAventura.checked();
+  let recomendacao = geraRecomendacao(idade, gostaDeFantasia, gostaDeAventura);
+
+  fill(color(76, 0, 115));
+  textAlign(CENTER, CENTER);
+  textSize(38);
+  text(recomendacao, width / 2, height / 2);
 }
 
-
-
-
-
-
+function geraRecomendacao(idade, gostaDeFantasia, gostaDeAventura) {
+  if (idade >= 10) {
+    if (idade >= 14) {
+      return "Deadpool e Wolverine";
+    } else {
+      if (idade >= 12) {
+        if(gostaDeFantasia || gostaDeAventura) {
+          return "Venom: Tempo de carneficina ";          
+        } else{
+         return "O menino do pijama listrado";
+        }
+      } else {
+        if (gostaDeFantasia) {
+          return "Velozes e furiosos";
+        } else {
+          return "Planeta dos macacos";
+        }
+      }
+    }
+  } else {
+    if (gostaDeFantasia) {
+      return "Homem aranha";
+    } else {
+      return "Titanic";
+    }
+  }
+}
 
 
 
